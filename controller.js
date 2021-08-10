@@ -108,9 +108,6 @@ export class Controller {
   //
   //
   game_playersTurnToMakeMove() {
-    //
-    //
-    //
     if (model.playersTurn == false && model.isPlayer2Human == false) {
       console.log("COMPUTERS TURN ----------------------");
       model.playersMove_randomlySelectColumn();
@@ -119,15 +116,7 @@ export class Controller {
       console.log(`consecutive slots: ${model.consecutiveSlots}`);
       view.view_Removal("view--play-screen");
       if (model.winner !== null) {
-        //
-        // console.log(`winner is ${model.winner}`);
-        // setTimeout(function () {
-        //   console.log(`INSIDE TIMEOUT FUNC`);
-        //   controller.game_restart();
-        //   view.view_Removal("view--play-screen");
-        // }, 2000);
         controller.game_restart();
-        //
       }
       view.view_GamePlay(model.isPlayer2Human, model.board);
       model.changeData_playersTurn();
@@ -143,15 +132,7 @@ export class Controller {
           console.log(`consecutive slots: ${model.consecutiveSlots}`);
           view.view_Removal("view--play-screen");
           if (model.winner !== null) {
-            //
             controller.game_restart();
-            // console.log(`winner is ${model.winner}`);
-            // setTimeout(function () {
-            //   console.log(`INSIDE TIMEOUT FUNC`);
-            //   controller.game_restart();
-            //   view.view_Removal("view--play-screen");
-            // }, 2000);
-            //
           }
           view.view_GamePlay(model.isPlayer2Human, model.board);
           model.changeData_playersTurn();
