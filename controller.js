@@ -46,11 +46,13 @@ export class Controller {
   //
   //
   game_restart() {
+    console.log(model.winner);
     if (model.winner == true) {
       view.view_GameEnd("Player 1 Wins!");
     } else {
       view.view_GameEnd("Player 2 Wins!");
     }
+    console.log(model.board);
     const mainMenuButton = document.getElementById("modal--button");
     mainMenuButton.addEventListener("click", () => {
       view.view_Removal("winner-modal");
@@ -128,8 +130,14 @@ export class Controller {
           console.log(`consecutive slots: ${model.consecutiveSlots}`);
           view.view_Removal("view--play-screen");
           if (model.winner !== null) {
-            this.game_restart();
-            view.view_Removal("view--play-screen");
+            //
+            console.log(`winner is ${model.winner}`);
+            setTimeout(function () {
+              console.log(`INSIDE TIMEOUT FUNC`);
+              this.game_restart();
+              view.view_Removal("view--play-screen");
+            }, 2000);
+            //
           }
           view.view_GamePlay(model.isPlayer2Human, model.board);
           model.changeData_playersTurn();
