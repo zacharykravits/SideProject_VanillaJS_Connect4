@@ -46,19 +46,25 @@ export class Controller {
   //
   //
   game_restart() {
-    console.log(model.winner);
-    if (model.winner == true) {
-      view.view_GameEnd("Player 1 Wins!");
-    } else {
-      view.view_GameEnd("Player 2 Wins!");
-    }
-    console.log(model.board);
-    const mainMenuButton = document.getElementById("modal--button");
-    mainMenuButton.addEventListener("click", () => {
-      view.view_Removal("winner-modal");
-      model.resetData();
-      this.game_start();
-    });
+    console.log("WINNER WINNER CHICKEN DINNER for...");
+
+    setTimeout(function () {
+      view.view_Removal("player1-header");
+      view.view_Removal("vs-header");
+      view.view_Removal("player2-header");
+      view.view_Removal("board");
+      view.view_GameShowWinner(model.isPlayer2Human, model.winner, model.board);
+    }, 200);
+
+    setTimeout(function () {
+      view.view_GameShowResetButton();
+      const resetGameButton = document.getElementById("game-reset-button");
+      resetGameButton.addEventListener("click", () => {
+        model.resetData();
+        view.view_Removal("view--play-screen");
+        controller.game_start();
+      });
+    }, 500);
   }
 
   // ---------------------
@@ -113,8 +119,15 @@ export class Controller {
       console.log(`consecutive slots: ${model.consecutiveSlots}`);
       view.view_Removal("view--play-screen");
       if (model.winner !== null) {
-        this.game_restart();
-        view.view_Removal("view--play-screen");
+        //
+        // console.log(`winner is ${model.winner}`);
+        // setTimeout(function () {
+        //   console.log(`INSIDE TIMEOUT FUNC`);
+        //   controller.game_restart();
+        //   view.view_Removal("view--play-screen");
+        // }, 2000);
+        controller.game_restart();
+        //
       }
       view.view_GamePlay(model.isPlayer2Human, model.board);
       model.changeData_playersTurn();
@@ -131,12 +144,13 @@ export class Controller {
           view.view_Removal("view--play-screen");
           if (model.winner !== null) {
             //
-            console.log(`winner is ${model.winner}`);
-            setTimeout(function () {
-              console.log(`INSIDE TIMEOUT FUNC`);
-              this.game_restart();
-              view.view_Removal("view--play-screen");
-            }, 2000);
+            controller.game_restart();
+            // console.log(`winner is ${model.winner}`);
+            // setTimeout(function () {
+            //   console.log(`INSIDE TIMEOUT FUNC`);
+            //   controller.game_restart();
+            //   view.view_Removal("view--play-screen");
+            // }, 2000);
             //
           }
           view.view_GamePlay(model.isPlayer2Human, model.board);

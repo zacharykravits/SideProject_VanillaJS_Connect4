@@ -81,7 +81,7 @@ export class View {
       "Player 1"
     );
 
-    textElement.render("header--players", "", "", "h2", "vs");
+    textElement.render("header--players", "vs-header", "", "h2", "vs");
 
     if (isPlayer2Human == true) {
       textElement.render(
@@ -100,6 +100,8 @@ export class View {
         "CPU"
       );
     }
+
+    section.render("view--play-screen", "reset-button-section", "");
 
     section.render("view--play-screen", "board", "");
 
@@ -122,13 +124,51 @@ export class View {
   // ---------------------
   //
   //
-  view_GameEnd(playerWinner) {
-    modal.render(
-      "body",
-      "winner-modal",
-      `${playerWinner}`,
-      "Back To Main Menu"
+  view_GameShowResetButton() {
+    button.render(
+      "reset-button-section",
+      "game-reset-button",
+      "reset--button scale-in-top",
+      "Back to the Main Menu"
     );
+  }
+
+  // ---------------------
+  // --------------------- VIEW FOR END OF GAME ------------------------------------------
+  // ---------------------
+  //
+  //
+  view_GameShowWinner(isPlayer2Human, gameWinner, arrayOfSlots) {
+    isPlayer2Human
+      ? textElement.render(
+          "header--players",
+          "winner-winner--chicken-dinner",
+          "",
+          "h2",
+          `${gameWinner ? "Player 1" : "Player 2"} wins.`
+        )
+      : textElement.render(
+          "header--players",
+          "winner-winner--chicken-dinner",
+          "",
+          "h2",
+          `${gameWinner ? "Player 1" : "CPU"} wins.`
+        );
+
+    section.render("view--play-screen", "board", "");
+
+    for (let newCol in arrayOfSlots) {
+      column.render("board", `col-${newCol}`, "column column-gameEnd");
+      for (let newSlot in arrayOfSlots[newCol]) {
+        slot.render(
+          `col-${newCol}`,
+          `C${newCol}-R${newSlot}`,
+          `slot-ownership-${arrayOfSlots[newCol][newSlot]}`,
+          `col-${newCol}`,
+          `row-${newSlot}`
+        );
+      }
+    }
   }
 
   // ---------------------
