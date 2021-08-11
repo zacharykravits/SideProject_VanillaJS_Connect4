@@ -1,14 +1,7 @@
 // Views
 //
 
-import {
-  Section,
-  Slot,
-  Column,
-  TextElement,
-  Button,
-  Modal,
-} from "./components.js";
+import { Section, Slot, Column, TextElement, Button } from "./components.js";
 
 export class View {
   // ---------------------
@@ -27,14 +20,6 @@ export class View {
       "Connect 4"
     );
 
-    textElement.render(
-      "view--starting-screen",
-      "paragraph--start-instructions",
-      "",
-      "p",
-      "Playing a friend or the CPU?"
-    );
-
     section.render(
       "view--starting-screen",
       "starting-screen--start-buttons",
@@ -45,14 +30,14 @@ export class View {
       "starting-screen--start-buttons",
       "enable-player2--button",
       "mode-selection--button",
-      "Play a Friend"
+      "Versus Mode"
     );
 
     button.render(
       "starting-screen--start-buttons",
       "enable-cpu--button",
       "mode-selection--button",
-      "Play the CPU"
+      "CPU Mode"
     );
   }
 
@@ -206,4 +191,3 @@ let slot = new Slot();
 let column = new Column();
 let textElement = new TextElement();
 let button = new Button();
-let modal = new Modal();

@@ -1,8 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 
 body,
 html {
-  font-family: "Cormorant", serif;
+  font-family: "Inter", sans-serif;
   margin: 0;
   padding: 0;
   background: #f7f7f7;
@@ -16,7 +16,7 @@ body {
 h1 {
   font-size: 52px;
   text-align: center;
-  font-weight: 200;
+  font-weight: bold;
   color: #424242;
 }
 
@@ -150,37 +150,6 @@ h2 {
   box-shadow: inset 0 -0.6em 0 -0.35em rgba(0, 0, 0, 0.2);
 }
 
-#winner-modal {
-  background: rgb(255, 255, 255);
-  border: rgb(230, 230, 230) 2px solid;
-  border-radius: 8px;
-  max-width: 400px;
-  margin-top: 32px;
-  padding: 32px;
-  box-shadow: inset 0 -0.6em 0 -0.35em rgba(0, 0, 0, 0.2);
-}
-
-#modal--button {
-  padding: 0.8em 1.6em;
-  margin: auto;
-  border-radius: 0.15em;
-  box-sizing: border-box;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: #ffffff;
-  background-color: rgb(47, 113, 235);
-  box-shadow: inset 0 -0.6em 0 -0.35em rgba(0, 0, 0, 0.2);
-  text-align: center;
-  border: none;
-  margin: 0 25%;
-}
-
-#modal--header {
-  margin-top: 0;
-  font-weight: 600;
-}
-
 #main-header {
   margin-top: 0;
   font-weight: 600;
@@ -200,6 +169,10 @@ h2 {
   height: 100%;
   padding-top: 16px;
   margin: 0 auto;
+}
+
+#winner-winner--chicken-dinner {
+  text-align: center;
 }
 
 .column {
