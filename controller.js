@@ -49,10 +49,10 @@ export class Controller {
     console.log("WINNER WINNER CHICKEN DINNER for...");
 
     setTimeout(function () {
-      view.view_Removal("player1-header");
-      view.view_Removal("vs-header");
-      view.view_Removal("player2-header");
-      view.view_Removal("board");
+      // view.view_Removal("player1-header");
+      // view.view_Removal("vs-header");
+      // view.view_Removal("player2-header");
+      // view.view_Removal("board");
       view.view_GameShowWinner(model.isPlayer2Human, model.winner, model.board);
     }, 200);
 
@@ -74,18 +74,19 @@ export class Controller {
   //
   //
   game_goThroughAllCheckers() {
-    const checkers = [
-      model.checkData_Vertical(),
-      model.checkData_Horizontal(),
-      model.checkData_Incline(),
-      model.checkData_Decline(),
-    ];
-    for (let checker in checkers) {
-      checkers[checker];
-      if (model.winner == true || model.winner == false) {
-        break;
-      } else {
+    model.checkData_Vertical();
+    if (model.winner == null) {
+      model.consecutiveSlots = 0;
+      model.checkData_Horizontal();
+      //
+      if (model.winner == null) {
         model.consecutiveSlots = 0;
+        model.checkData_Incline();
+        //
+        if (model.winner == null) {
+          model.consecutiveSlots = 0;
+          model.checkData_Decline();
+        }
       }
     }
   }
@@ -108,21 +109,25 @@ export class Controller {
   //
   //
   game_playersTurnToMakeMove() {
+    //
     if (model.playersTurn == false && model.isPlayer2Human == false) {
+      console.log(" ");
       console.log("COMPUTERS TURN ----------------------");
       model.playersMove_randomlySelectColumn();
       model.playersMove_updateBoardWithSlot(model.randomlySelectedColumn);
       this.game_goThroughAllCheckers();
-      console.log(`consecutive slots: ${model.consecutiveSlots}`);
       view.view_Removal("view--play-screen");
       if (model.winner !== null) {
         controller.game_restart();
+      } else {
+        view.view_GamePlay(model.isPlayer2Human, model.board);
+        model.changeData_playersTurn();
+        this.game_playersTurnToMakeMove();
       }
-      view.view_GamePlay(model.isPlayer2Human, model.board);
-      model.changeData_playersTurn();
-      this.game_playersTurnToMakeMove();
+      //
     } else {
-      console.log("PLAYER 1S TURN ----------------------");
+      console.log(" ");
+      console.log("HUMANS TURN ----------------------");
       document.querySelectorAll(".column").forEach((button) => {
         button.addEventListener("click", () => {
           model.playersMove_updateBoardWithSlot(
@@ -132,11 +137,13 @@ export class Controller {
           console.log(`consecutive slots: ${model.consecutiveSlots}`);
           view.view_Removal("view--play-screen");
           if (model.winner !== null) {
+            console.log("restart running....................");
             controller.game_restart();
+          } else {
+            view.view_GamePlay(model.isPlayer2Human, model.board);
+            model.changeData_playersTurn();
+            this.game_playersTurnToMakeMove();
           }
-          view.view_GamePlay(model.isPlayer2Human, model.board);
-          model.changeData_playersTurn();
-          this.game_playersTurnToMakeMove();
         });
       });
     }

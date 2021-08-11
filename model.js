@@ -72,9 +72,6 @@ export class Model {
         break;
       }
     }
-    console.log(
-      `last col ${this.lastColumnSelected}, row ${this.lastRowSelected}`
-    );
   }
 
   // ---------------------
@@ -142,6 +139,14 @@ export class Model {
   }
 
   // ---------------------
+  // --------------------- INCLINE FIND STARTING POINT ------------------------------------------
+  // ---------------------
+  // check if consecutive slots in incline direction
+  //
+  //
+  findStartingPoint_Incline() {}
+
+  // ---------------------
   // --------------------- CHECK INCLINE ------------------------------------------
   // ---------------------
   // check if consecutive slots in incline direction
@@ -165,8 +170,9 @@ export class Model {
       ) {
         if (this.board[column][row] !== this.playersTurn) {
           this.consecutiveSlots = 0;
+          break;
         } else {
-          this.consecutiveSlots = this.consecutiveSlots + 1;
+          this.consecutiveSlots += 1;
           this.checkData_ConsecutiveSlots(this.consecutiveSlots);
         }
       }
@@ -178,6 +184,8 @@ export class Model {
     //
     //
     const understandPosition_InclineDiagonal = () => {
+      //
+      //
       if (this.lastRowSelected == 5 || this.lastColumnSelected == 0) {
         useStartingPosition_InclineDiagonal(
           this.lastColumnSelected,
@@ -213,7 +221,6 @@ export class Model {
   //
   //
   checkData_Decline() {
-    console.log(this.consecutiveSlots);
     // --------------------- USING STARTING POSTION - DECLINE
     // using starting position
     // loop through to see if consecutive slots
@@ -224,18 +231,25 @@ export class Model {
       ColToStartAt,
       RowToStartAt
     ) => {
+      console.log(`STARTING @ col: ${ColToStartAt} row: ${RowToStartAt}`);
       for (
         let column = ColToStartAt, row = RowToStartAt;
-        column < this.board.length, row < this.board[0].length;
+        column < this.board.length;
         column++, row++
       ) {
+        console.log(`LOOP ITERNATION col: ${column} row: ${row}`);
         if (
+          this.board[column][row] !== this.playersTurn ||
           this.board[column] == undefined ||
-          this.board[column][row] !== this.playersTurn
+          this.board[column][row] == undefined
         ) {
           this.consecutiveSlots = 0;
+          console.log(`SLOTS IN A ROW: ${this.consecutiveSlots}`);
+          console.log("break here");
+          break;
         } else {
-          this.consecutiveSlots = this.consecutiveSlots + 1;
+          this.consecutiveSlots += 1;
+          console.log(`SLOTS IN A ROW: ${this.consecutiveSlots}`);
           this.checkData_ConsecutiveSlots(this.consecutiveSlots);
         }
       }
@@ -247,12 +261,7 @@ export class Model {
     //
     //
     const understandPosition_DeclineDiagonal = () => {
-      if (
-        this.lastRowSelected == 0 ||
-        this.lastRowSelected == 5 ||
-        this.lastColumnSelected == 0 ||
-        this.lastColumnSelected == 6
-      ) {
+      if (this.lastRowSelected == 0 || this.lastColumnSelected == 0) {
         useStartingPosition_DeclineDiagonal(
           this.lastColumnSelected,
           this.lastRowSelected

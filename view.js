@@ -101,8 +101,6 @@ export class View {
       );
     }
 
-    section.render("view--play-screen", "reset-button-section", "");
-
     section.render("view--play-screen", "board", "");
 
     for (let newCol in arrayOfSlots) {
@@ -139,21 +137,35 @@ export class View {
   //
   //
   view_GameShowWinner(isPlayer2Human, gameWinner, arrayOfSlots) {
+    section.render("body", "view--play-screen", "");
+
+    textElement.render(
+      "view--play-screen",
+      "main-header",
+      "",
+      "h1",
+      "Connect 4"
+    );
+
+    section.render("view--play-screen", "winner-header-section", "");
+
     isPlayer2Human
       ? textElement.render(
-          "header--players",
+          "winner-header-section",
           "winner-winner--chicken-dinner",
           "",
           "h2",
           `${gameWinner ? "Player 1" : "Player 2"} wins.`
         )
       : textElement.render(
-          "header--players",
+          "winner-header-section",
           "winner-winner--chicken-dinner",
           "",
           "h2",
           `${gameWinner ? "Player 1" : "CPU"} wins.`
         );
+
+    section.render("view--play-screen", "reset-button-section", "");
 
     section.render("view--play-screen", "board", "");
 
